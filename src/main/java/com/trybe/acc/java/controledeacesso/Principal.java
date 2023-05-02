@@ -9,7 +9,7 @@ import java.util.Scanner;
  */
 public class Principal {
   /**
-   * Método displayOptions.
+   * Mostra pergunta e opções para iniciar o programa.
    */
   private static void displayOptions() {
     System.out.println("Entre com o número correspondente à opção desejada:");
@@ -18,7 +18,9 @@ public class Principal {
   }
 
   /**
-   * Método printMessage.
+   * Mostra uma mensagem baseada na idade do cliente.
+
+   * @param age Um Integer que representa a idade do cliente.
    */
   private static void printMessage(int age) {
     String minorMessage = "Pessoa cliente menor de idade, catraca liberada!";
@@ -35,7 +37,11 @@ public class Principal {
   }
 
   /**
-   * Método getNumberOfClientsBasedOnAge.
+   * Retorna o número de clientes baseado na idade especificada pelo filtro.
+
+   * @param ageList Um ArrayList contendo as idades dos clientes.
+   * @param filter Uma String especificando o filtro de idade ("minor", "adult", or "old")
+   * @return um Integer representando o número de clientes baseado no filtro
    */
   private static int getNumberOfClientsBasedOnAge(ArrayList<Integer> ageList, String filter) {
     ArrayList<Integer> filteredAgeList = new ArrayList<Integer>();
@@ -55,6 +61,12 @@ public class Principal {
     return filteredAgeList.size();
   }
 
+  /**
+   * Gera um relatório com base na lista de idades fornecida. O relatório contém a quantidade e o
+   * percentual de clientes classificados em cada faixa etária.
+
+   * @param ageList a lista de idades dos clientes
+   */
   private static void generateReport(ArrayList<Integer> ageList) {
     DecimalFormat decimalFormat = new DecimalFormat("0.0%");
 
@@ -79,7 +91,24 @@ public class Principal {
   }
 
   /**
-   * Método principal.
+   * Solicita a idade do usuário através do Scanner e adiciona o valor informado em uma lista de
+   * idades.
+
+   * @param scanner o objeto Scanner para leitura da entrada do usuário
+   * @param ageList a lista de idades onde será adicionada a idade informada pelo usuário
+   */
+  private static void getClientAge(Scanner scanner, ArrayList<Integer> ageList) {
+    System.out.println("Entre com a sua idade:");
+    int age = scanner.nextInt();
+    ageList.add(age);
+    printMessage(age);
+  }
+
+  /**
+   * Método principal do programa, responsável por solicitar a idade do usuário e gerar um
+   * relatório.
+
+   * @param args argumentos passados na linha de comando (não utilizado neste programa)
    */
   public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
@@ -91,13 +120,8 @@ public class Principal {
     if (option != 1 && option != 2) {
       System.out.println("Entre com uma opção válida");
     } else if (option == 1) {
-
       while (option != 2) {
-        System.out.println("Entre com a sua idade:");
-        int age = scanner.nextInt();
-        ageList.add(age);
-        printMessage(age);
-
+        getClientAge(scanner, ageList);
         displayOptions();
         option = scanner.nextInt();
       }
