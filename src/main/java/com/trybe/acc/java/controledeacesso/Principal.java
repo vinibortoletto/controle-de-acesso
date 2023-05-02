@@ -55,6 +55,29 @@ public class Principal {
     return filteredAgeList.size();
   }
 
+  private static void generateReport(ArrayList<Integer> ageList) {
+    DecimalFormat decimalFormat = new DecimalFormat("0.0%");
+
+    int totalClient = ageList.size();
+    int minor = getNumberOfClientsBasedOnAge(ageList, "minor");
+    int adult = getNumberOfClientsBasedOnAge(ageList, "adult");
+    int old = getNumberOfClientsBasedOnAge(ageList, "old");
+
+    float minorPercentage = (float) minor / totalClient;
+    float adultPercentage = (float) adult / totalClient;
+    float oldPercentage = (float) old / totalClient;
+
+    System.out.println("----- Quantidade -----");
+    System.out.println("menores: " + minor);
+    System.out.println("adultas: " + adult);
+    System.out.println("a partir de 50: " + old);
+
+    System.out.println("----- Percentual -----");
+    System.out.println("menores: " + decimalFormat.format(minorPercentage));
+    System.out.println("adultas: " + decimalFormat.format(adultPercentage));
+    System.out.println("a partir de 50: " + decimalFormat.format(oldPercentage));
+  }
+
   /**
    * Método principal.
    */
@@ -81,25 +104,7 @@ public class Principal {
     }
 
     if (option == 2) {
-      int totalClient = ageList.size();
-      int minor = getNumberOfClientsBasedOnAge(ageList, "minor");
-      int adult = getNumberOfClientsBasedOnAge(ageList, "adult");
-      int old = getNumberOfClientsBasedOnAge(ageList, "old");
-      DecimalFormat decimalFormat = new DecimalFormat("0.0%");
-
-      float minorPercentage = (float) minor / totalClient;
-      float adultPercentage = (float) adult / totalClient;
-      float oldPercentage = (float) old / totalClient;
-
-      System.out.println("----- Quantidade -----");
-      System.out.println("menores: " + minor);
-      System.out.println("adultas: " + adult);
-      System.out.println("a partir de 50: " + old);
-
-      System.out.println("----- Percentual -----");
-      System.out.println("menores: " + decimalFormat.format(minorPercentage));
-      System.out.println("adultas: " + decimalFormat.format(adultPercentage));
-      System.out.println("a partir de 50: " + decimalFormat.format(oldPercentage));
+      generateReport(ageList);
     }
 
     scanner.close();
